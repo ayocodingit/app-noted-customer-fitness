@@ -17,4 +17,13 @@
 const Route = use('Route')
 
 Route.get('/', 'HomeController.index')
-Route.get('/api', 'HomeController.index')
+
+Route.group(() => {
+  Route.get('/', 'HomeController.index')
+  Route.resource('customers', 'CustomerController')
+    .apiOnly()
+    .validator(new Map([
+      [['customers.store'], ['CustomerRequest']],
+      [['customers.update'], ['CustomerRequest']]
+    ]))
+}).prefix('api')

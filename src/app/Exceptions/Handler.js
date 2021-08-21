@@ -2,7 +2,6 @@
 
 const BaseExceptionHandler = use('BaseExceptionHandler')
 const Logger = use('Logger')
-const Sentry = use('Sentry')
 const Config = use('Config')
 const { StatusCodes, getReasonPhrase } = require('http-status-codes')
 
@@ -55,7 +54,6 @@ class ExceptionHandler extends BaseExceptionHandler {
         date: new Date(),
         message: error.message
       })
-      Sentry.captureException(error)
     }
   }
 }

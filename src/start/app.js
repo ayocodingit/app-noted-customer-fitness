@@ -17,10 +17,13 @@ const providers = [
   '@adonisjs/bodyparser/providers/BodyParserProvider',
   '@adonisjs/cors/providers/CorsProvider',
   '@adonisjs/lucid/providers/LucidProvider',
-  'adonis-sentry/providers/Sentry',
   '@adonisjs/validator/providers/ValidatorProvider',
+  '@adonisjs/vow/providers/VowProvider',
   '@adonisjs/antl/providers/AntlProvider',
   '@adonisjs/drive/providers/DriveProvider',
+  '@adonisjs/mail/providers/MailProvider',
+  '@adonisjs/framework/providers/ViewProvider',
+  '@adonisjs/session/providers/SessionProvider',
   '@adonisjs/shield/providers/ShieldProvider'
 ]
 

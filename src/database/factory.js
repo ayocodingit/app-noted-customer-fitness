@@ -14,14 +14,11 @@
 /** @type {import('@adonisjs/lucid/src/Factory')} */
 const Factory = use('Factory')
 const RoleEnum = use('App/Enums/RoleEnum')
-const Config = use('Config')
 
 Factory.blueprint('App/Models/User', (faker) => {
   return {
-    email: faker.email(),
     username: faker.username(),
-    role: faker.pickone(RoleEnum.getArray('value')),
-    password: Config.get('app.appKey'),
-    avatar: faker.avatar()
+    role: RoleEnum.enum.ADMIN.value,
+    password: 'admin123'
   }
 })
