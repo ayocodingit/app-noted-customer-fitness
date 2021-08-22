@@ -3,8 +3,8 @@
 const User = use('App/Models/User')
 class AuthController {
   async login ({ request, response, auth }) {
-    const { email, password } = request.all()
-    const token = await auth.withRefreshToken().attempt(email, password)
+    const { username, password } = request.all()
+    const token = await auth.withRefreshToken().attempt(username, password)
     return response.json(token)
   }
 
