@@ -22,7 +22,8 @@ const update = async (id, payload, model) => {
 
 const destroy = async (id, model) => {
   const record = await model.findOrFail(id)
-  return await record.delete()
+  await record.delete()
+  return { message: 'Deleted' }
 }
 
 module.exports = {

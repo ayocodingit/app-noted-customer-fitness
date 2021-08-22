@@ -90,12 +90,10 @@ class CustomerController {
    * DELETE customers/:id
    *
    * @param {object} ctx
-   * @param {Response} ctx.response
+   * @param {Params} ctx.params
    */
-  async destroy ({ params, response }) {
-    await destroy(params.id, Customer)
-
-    return response.json({ message: 'Deleted' })
+  async destroy ({ params }) {
+    return await destroy(params.id, Customer)
   }
 }
 
