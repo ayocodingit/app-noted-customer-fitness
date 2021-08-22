@@ -19,6 +19,17 @@ class CustomerController {
    * @param {Response} ctx.response
    */
   async index ({ request, response }) {
+
+    const page = request.input('page', 1)
+    const perPage = request.input('perpage', 50)
+
+    const customer = Customer.query()
+
+    if (request.input('name')) {
+      customer.where('name', request.input('name'))
+    }
+
+    return response.send(await customer.paginate(page, perPage))
   }
 
   /**
@@ -35,7 +46,8 @@ class CustomerController {
       'age',
       'height',
       'address',
-      'phone_number'
+      'phone_number',
+      'user_id'
     ])
 
     await Customer.create(payload)
@@ -48,10 +60,10 @@ class CustomerController {
    * GET customers/:id
    *
    * @param {object} ctx
-   * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async show ({ params, request, response }) {
+  async show ({ params, response }) {
+    return response.send(await Customer.findOrFail(params.id))
   }
 
   /**
@@ -63,6 +75,21 @@ class CustomerController {
    * @param {Response} ctx.response
    */
   async update ({ params, request, response }) {
+    const payload = request.only([
+      'name',
+      'age',
+      'height',
+      'address',
+      'phone_number',
+      'user_id'
+    ])
+
+    const customer = await Customer.findOrFail(params.id)
+    customer.merge(payload)
+    await customer.save()
+
+    return response.json({ message: 'Updated' })
+
   }
 
   /**
@@ -70,10 +97,14 @@ class CustomerController {
    * DELETE customers/:id
    *
    * @param {object} ctx
-   * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async destroy ({ params, request, response }) {
+  async destroy ({ params, response }) {
+    const customer = await Customer.findOrFail(params.id)
+    await customer.delete()
+
+    return response.json({ message: 'Deleted' })
+
   }
 }
 
