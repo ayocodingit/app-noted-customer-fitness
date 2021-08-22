@@ -17,9 +17,8 @@ class PackageController {
    *
    * @param {object} ctx
    * @param {Request} ctx.request
-   * @param {Response} ctx.response
    */
-  async index ({ request, response }) {
+  async index ({ request }) {
     const record = Package.query().whereBy('name', request.input('name'))
 
     return await paginate(request, record)
