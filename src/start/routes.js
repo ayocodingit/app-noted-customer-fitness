@@ -15,6 +15,8 @@
 
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
+const ResourceRoute = require('./ResourceRoute')
+
 
 Route.get('/', 'HomeController.index')
 
@@ -24,28 +26,20 @@ Route.group(() => {
   Route.get('/', 'HomeController.index')
   Route.post('refresh-token', 'AuthController.refreshToken')
   Route.post('update-password', 'AuthController.updatePassword')
-  Route.resource('customers', 'CustomerController')
-    .apiOnly()
-    .validator(new Map([
-      [['customers.store'], ['CustomerRequest']],
-      [['customers.update'], ['CustomerRequest']]
-    ]))
-  Route.resource('packages', 'PackageController')
-    .apiOnly()
-    .validator(new Map([
-      [['packages.store'], ['PackageRequest']],
-      [['packages.update'], ['PackageRequest']]
-    ]))
-  Route.resource('achievements', 'AchievementController')
-    .apiOnly()
-    .validator(new Map([
-      [['achievements.store'], ['AchievementRequest']],
-      [['achievements.update'], ['AchievementRequest']]
-    ]))
-  Route.resource('programs', 'ProgramController')
-    .apiOnly()
-    .only(['index', 'store'])
-    .validator(new Map([
-      [['programs.store'], ['ProgramRequest']]
-    ]))
+  ResourceRoute('customers', 'CustomerController', [
+    [['customers.store'], ['CustomerRequest']],
+    [['customers.update'], ['CustomerRequest']]
+  ])
+  ResourceRoute('packages', 'PackageController', [
+    [['packages.store'], ['PackageRequest']],
+    [['packages.update'], ['PackageRequest']]
+  ])
+  ResourceRoute('achievements', 'AchievementController', [
+    [['achievements.store'], ['AchievementRequest']],
+    [['achievements.update'], ['AchievementRequest']]
+  ])
+  ResourceRoute('programs', 'ProgramController', [
+    [['programs.store'], ['ProgramRequest']]
+  ])
+  .only(['index', 'store'])
 }).prefix('api').middleware('auth')
