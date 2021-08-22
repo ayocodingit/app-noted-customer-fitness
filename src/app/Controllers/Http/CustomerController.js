@@ -22,13 +22,13 @@ class CustomerController {
     const page = request.input('page', 1)
     const perPage = request.input('perPage', 50)
 
-    const record = Customer.query()
+    const customers = Customer.query()
 
     if (request.input('name')) {
-      record.where('name', request.input('name'))
+      customers.where('name', request.input('name'))
     }
 
-    return response.json(await record.paginate(page, perPage))
+    return response.json(await customers.paginate(page, perPage))
   }
 
   /**
@@ -83,9 +83,9 @@ class CustomerController {
       'user_id'
     ])
 
-    const record = await Customer.findOrFail(params.id)
-    record.merge(payload)
-    await record.save()
+    const customers = await Customer.findOrFail(params.id)
+    customers.merge(payload)
+    await customers.save()
 
     return response.json({ message: 'Updated' })
   }
@@ -98,8 +98,8 @@ class CustomerController {
    * @param {Response} ctx.response
    */
   async destroy ({ params, response }) {
-    const record = await Customer.findOrFail(params.id)
-    await record.delete()
+    const customers = await Customer.findOrFail(params.id)
+    await customers.delete()
 
     return response.json({ message: 'Deleted' })
   }

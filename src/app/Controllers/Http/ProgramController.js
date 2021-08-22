@@ -22,15 +22,15 @@ class ProgramController {
     const page = request.input('page', 1)
     const perPage = request.input('perPage', 50)
 
-    const record = Program.query().with('customer')
+    const programs = Program.query().with('customer')
 
     if (request.input('name')) {
-      record.whereHas('customer', query => {
+      programs.whereHas('customer', query => {
         query.where('name', request.input('name'))
       })
     }
 
-    return response.json(await record.paginate(page, perPage))
+    return response.json(await programs.paginate(page, perPage))
   }
 
   /**

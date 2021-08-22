@@ -22,13 +22,13 @@ class AchievementController {
     const page = request.input('page', 1)
     const perPage = request.input('perPage', 50)
 
-    const record = Achievement.query()
+    const achievements = Achievement.query()
 
     if (request.input('customer_id')) {
-      record.where('customer_id', request.input('customer_id'))
+      achievements.where('customer_id', request.input('customer_id'))
     }
 
-    return response.json(await record.paginate(page, perPage))
+    return response.json(await achievements.paginate(page, perPage))
   }
 
   /**
@@ -91,9 +91,9 @@ class AchievementController {
       'customer_id'
     ])
 
-    const record = await Achievement.findOrFail(params.id)
-    record.merge(payload)
-    await record.save()
+    const achievements = await Achievement.findOrFail(params.id)
+    achievements.merge(payload)
+    await achievements.save()
 
     return response.json({ message: 'Updated' })
   }
