@@ -4,15 +4,15 @@
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 
 const { StatusCodes } = require('http-status-codes')
-const Customer = use('App/Models/Customer')
+const Package = use('App/Models/Package')
 
 /**
- * Resourceful controller for interacting with customers
+ * Resourceful controller for interacting with packages
  */
-class CustomerController {
+class PackageController {
   /**
-   * Show a list of all customers.
-   * GET customers
+   * Show a list of all packages.
+   * GET packages
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -22,7 +22,7 @@ class CustomerController {
     const page = request.input('page', 1)
     const perPage = request.input('perPage', 50)
 
-    const record = Customer.query()
+    const record = Package.query()
 
     if (request.input('name')) {
       record.where('name', request.input('name'))
@@ -32,8 +32,8 @@ class CustomerController {
   }
 
   /**
-   * Create/save a new customer.
-   * POST customers
+   * Create/save a new package.
+   * POST packages
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -42,32 +42,30 @@ class CustomerController {
   async store ({ request, response }) {
     const payload = request.only([
       'name',
-      'age',
-      'height',
-      'address',
-      'phone_number',
-      'user_id'
+      'description',
+      'price',
+      'number_of_drink'
     ])
 
-    await Customer.create(payload)
+    await Package.create(payload)
 
     return response.status(StatusCodes.CREATED).json({ message: 'Created' })
   }
 
   /**
-   * Display a single customer.
-   * GET customers/:id
+   * Display a single package.
+   * GET packages/:id
    *
    * @param {object} ctx
    * @param {Response} ctx.response
    */
   async show ({ params, response }) {
-    return response.json(await Customer.findOrFail(params.id))
+    return response.json(await Package.findOrFail(params.id))
   }
 
   /**
-   * Update customer details.
-   * PUT or PATCH customers/:id
+   * Update package details.
+   * PUT or PATCH packages/:id
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -76,14 +74,12 @@ class CustomerController {
   async update ({ params, request, response }) {
     const payload = request.only([
       'name',
-      'age',
-      'height',
-      'address',
-      'phone_number',
-      'user_id'
+      'description',
+      'price',
+      'number_of_drink'
     ])
 
-    const record = await Customer.findOrFail(params.id)
+    const record = await Package.findOrFail(params.id)
     record.merge(payload)
     await record.save()
 
@@ -91,18 +87,18 @@ class CustomerController {
   }
 
   /**
-   * Delete a customer with id.
-   * DELETE customers/:id
+   * Delete a package with id.
+   * DELETE packages/:id
    *
    * @param {object} ctx
    * @param {Response} ctx.response
    */
   async destroy ({ params, response }) {
-    const record = await Customer.findOrFail(params.id)
+    const record = await Package.findOrFail(params.id)
     await record.delete()
 
     return response.json({ message: 'Deleted' })
   }
 }
 
-module.exports = CustomerController
+module.exports = PackageController

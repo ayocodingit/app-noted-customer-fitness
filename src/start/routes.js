@@ -18,12 +18,34 @@ const Route = use('Route')
 
 Route.get('/', 'HomeController.index')
 
+Route.post('login', 'AuthController.login').prefix('api').middleware('guest')
+
 Route.group(() => {
   Route.get('/', 'HomeController.index')
+  Route.post('refresh-token', 'AuthController.refreshToken')
+  Route.post('update-password', 'AuthController.updatePassword')
   Route.resource('customers', 'CustomerController')
     .apiOnly()
     .validator(new Map([
       [['customers.store'], ['CustomerRequest']],
       [['customers.update'], ['CustomerRequest']]
     ]))
-}).prefix('api')
+  Route.resource('packages', 'PackageController')
+    .apiOnly()
+    .validator(new Map([
+      [['packages.store'], ['PackageRequest']],
+      [['packages.update'], ['PackageRequest']]
+    ]))
+  Route.resource('achievements', 'AchievementController')
+    .apiOnly()
+    .validator(new Map([
+      [['achievements.store'], ['AchievementRequest']],
+      [['achievements.update'], ['AchievementRequest']]
+    ]))
+  Route.resource('programs', 'ProgramController')
+    .apiOnly()
+    .only(['index', 'store'])
+    .validator(new Map([
+      [['programs.store'], ['ProgramRequest']]
+    ]))
+}).prefix('api').middleware('auth')

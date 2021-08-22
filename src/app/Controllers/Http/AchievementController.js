@@ -4,15 +4,15 @@
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 
 const { StatusCodes } = require('http-status-codes')
-const Customer = use('App/Models/Customer')
+const Achievement = use('App/Models/Achievement')
 
 /**
- * Resourceful controller for interacting with customers
+ * Resourceful controller for interacting with achievements
  */
-class CustomerController {
+class AchievementController {
   /**
-   * Show a list of all customers.
-   * GET customers
+   * Show a list of all achievements.
+   * GET achievements
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -22,18 +22,18 @@ class CustomerController {
     const page = request.input('page', 1)
     const perPage = request.input('perPage', 50)
 
-    const record = Customer.query()
+    const record = Achievement.query()
 
-    if (request.input('name')) {
-      record.where('name', request.input('name'))
+    if (request.input('customer_id')) {
+      record.where('customer_id', request.input('customer_id'))
     }
 
     return response.json(await record.paginate(page, perPage))
   }
 
   /**
-   * Create/save a new customer.
-   * POST customers
+   * Create/save a new achievement.
+   * POST achievements
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -41,33 +41,37 @@ class CustomerController {
    */
   async store ({ request, response }) {
     const payload = request.only([
-      'name',
-      'age',
-      'height',
-      'address',
-      'phone_number',
-      'user_id'
+      'weight',
+      'body_fat',
+      'body_water_range',
+      'muscle_mass',
+      'physique_rating',
+      'bmr',
+      'body_age',
+      'bone_mass',
+      'stomach_fat',
+      'customer_id'
     ])
 
-    await Customer.create(payload)
+    await Achievement.create(payload)
 
     return response.status(StatusCodes.CREATED).json({ message: 'Created' })
   }
 
   /**
-   * Display a single customer.
-   * GET customers/:id
+   * Display a single achievement.
+   * GET achievements/:id
    *
    * @param {object} ctx
    * @param {Response} ctx.response
    */
   async show ({ params, response }) {
-    return response.json(await Customer.findOrFail(params.id))
+    return response.json(await Achievement.findOrFail(params.id))
   }
 
   /**
-   * Update customer details.
-   * PUT or PATCH customers/:id
+   * Update achievement details.
+   * PUT or PATCH achievements/:id
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -75,34 +79,24 @@ class CustomerController {
    */
   async update ({ params, request, response }) {
     const payload = request.only([
-      'name',
-      'age',
-      'height',
-      'address',
-      'phone_number',
-      'user_id'
+      'weight',
+      'body_fat',
+      'body_water_range',
+      'muscle_mass',
+      'physique_rating',
+      'bmr',
+      'body_age',
+      'bone_mass',
+      'stomach_fat',
+      'customer_id'
     ])
 
-    const record = await Customer.findOrFail(params.id)
+    const record = await Achievement.findOrFail(params.id)
     record.merge(payload)
     await record.save()
 
     return response.json({ message: 'Updated' })
   }
-
-  /**
-   * Delete a customer with id.
-   * DELETE customers/:id
-   *
-   * @param {object} ctx
-   * @param {Response} ctx.response
-   */
-  async destroy ({ params, response }) {
-    const record = await Customer.findOrFail(params.id)
-    await record.delete()
-
-    return response.json({ message: 'Deleted' })
-  }
 }
 
-module.exports = CustomerController
+module.exports = AchievementController

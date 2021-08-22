@@ -39,7 +39,7 @@
   "min_string": "Isian { attribute } harus minimal { min } karakter.",
   "min_array": "Isian { attribute } harus minimal { min } item.",
   "not_in": "Isian { attribute } yang dipilih tidak valid.",
-  "numeric": "Isian { attribute } harus berupa angka.",
+  "number": "Isian { attribute } harus berupa angka.",
   "present": "Isian { attribute } wajib ada.",
   "regex": "Format isian { attribute } tidak valid.",
   "required": "Isian { attribute } wajib diisi.",

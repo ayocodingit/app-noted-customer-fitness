@@ -16,7 +16,7 @@ class AchievementSchema extends Schema {
       table.float('body_age').notNullable()
       table.float('bone_mass').notNullable()
       table.float('stomach_fat').notNullable()
-      table.bigInteger('customer_id').notNullable().index()
+      table.bigInteger('customer_id').notNullable().index().unsigned().references('id').inTable('customers').onDelete('CASCADE')
       table.timestamps()
     })
   }

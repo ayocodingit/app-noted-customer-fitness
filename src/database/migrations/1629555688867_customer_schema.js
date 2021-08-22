@@ -12,7 +12,7 @@ class CustomerSchema extends Schema {
       table.integer('height').notNullable().index()
       table.string('address', 255)
       table.string('phone_number', 15)
-      table.bigInteger('user_id').index()
+      table.bigInteger('user_id').unique().unsigned().references('id').inTable('users').onDelete('CASCADE')
       table.timestamps()
     })
   }
