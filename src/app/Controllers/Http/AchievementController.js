@@ -22,9 +22,10 @@ class AchievementController {
    */
   async index ({ request, response }) {
     const record = Achievement.query()
+    const customerId = request.input('customer_id')
 
-    if (request.input('customer_id')) {
-      record.where('customer_id', request.input('customer_id'))
+    if (customerId) {
+      record.where('customer_id', customerId)
     }
 
     return response.json(await paginate(request, record))

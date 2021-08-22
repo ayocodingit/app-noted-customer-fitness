@@ -22,9 +22,10 @@ class PackageController {
    */
   async index ({ request, response }) {
     const record = Package.query()
+    const name = request.input('name')
 
-    if (request.input('name')) {
-      record.where('name', request.input('name'))
+    if (name) {
+      record.where('name', name)
     }
 
     return response.json(await paginate(request, record))
