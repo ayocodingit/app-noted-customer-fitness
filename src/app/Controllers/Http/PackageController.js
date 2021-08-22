@@ -21,9 +21,9 @@ class PackageController {
    * @param {Response} ctx.response
    */
   async index ({ request, response }) {
-    let record = Package.query()
+    const record = Package.query()
 
-    record = where('name', request.input('name'), record)
+    where('name', request.input('name'), record)
 
     return response.json(await paginate(request, record))
   }
