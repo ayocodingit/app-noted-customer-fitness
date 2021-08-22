@@ -1,7 +1,7 @@
 'use strict'
 
 const Antl = use('Antl')
-const { StatusCodes } = require('http-status-codes')
+const failResponse = use('App/Validators/ResponseRequest')
 
 class PackageRequest {
   get validateAll () {
@@ -34,9 +34,7 @@ class PackageRequest {
   }
 
   async fails (errorMessages) {
-    return this.ctx.response
-      .status(StatusCodes.UNPROCESSABLE_ENTITY)
-      .json({ errors: errorMessages })
+    return failResponse(errorMessages)
   }
 }
 

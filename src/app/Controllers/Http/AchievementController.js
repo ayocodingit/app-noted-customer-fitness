@@ -7,7 +7,6 @@ const { StatusCodes } = require('http-status-codes')
 const Achievement = use('App/Models/Achievement')
 const { paginate, store, show, update } = use('App/Controllers/Http/BaseController')
 
-
 /**
  * Resourceful controller for interacting with achievements
  */

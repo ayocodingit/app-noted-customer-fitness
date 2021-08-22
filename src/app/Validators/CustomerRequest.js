@@ -1,8 +1,9 @@
 'use strict'
 
 const Antl = use('Antl')
-const { StatusCodes } = require('http-status-codes')
 const Exists = use('App/Validators/Rules/Exists')
+const failResponse = use('App/Validators/ResponseRequest')
+
 class CustomerRequest {
   constructor () {
     Exists()
@@ -43,9 +44,7 @@ class CustomerRequest {
   }
 
   async fails (errorMessages) {
-    return this.ctx.response
-      .status(StatusCodes.UNPROCESSABLE_ENTITY)
-      .json({ errors: errorMessages })
+    return failResponse(errorMessages)
   }
 }
 

@@ -7,7 +7,6 @@ const { StatusCodes } = require('http-status-codes')
 const Package = use('App/Models/Package')
 const { paginate, store, show, update, destroy, where } = use('App/Controllers/Http/BaseController')
 
-
 /**
  * Resourceful controller for interacting with packages
  */

@@ -17,7 +17,6 @@
 const Route = use('Route')
 const ResourceRoute = require('./ResourceRoute')
 
-
 Route.get('/', 'HomeController.index')
 
 Route.post('login', 'AuthController.login').prefix('api').middleware('guest')
@@ -41,5 +40,5 @@ Route.group(() => {
   ResourceRoute('programs', 'ProgramController', [
     [['programs.store'], ['ProgramRequest']]
   ])
-  .only(['index', 'store'])
+    .only(['index', 'store'])
 }).prefix('api').middleware('auth')
