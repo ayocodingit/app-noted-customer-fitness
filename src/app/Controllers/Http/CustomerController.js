@@ -5,6 +5,7 @@
 
 const { StatusCodes } = require('http-status-codes')
 const Customer = use('App/Models/Customer')
+const { paginate, store, show, update, destroy } = use('App/Controllers/Http/BaseController')
 
 /**
  * Resourceful controller for interacting with customers
@@ -19,16 +20,13 @@ class CustomerController {
    * @param {Response} ctx.response
    */
   async index ({ request, response }) {
-    const page = request.input('page', 1)
-    const perPage = request.input('perPage', 50)
-
-    const customers = Customer.query()
+    const record = Customer.query()
 
     if (request.input('name')) {
-      customers.where('name', request.input('name'))
+      record.where('name', request.input('name'))
     }
 
-    return response.json(await customers.paginate(page, perPage))
+    return response.json(await paginate(request, record))
   }
 
   /**
@@ -49,7 +47,7 @@ class CustomerController {
       'user_id'
     ])
 
-    await Customer.create(payload)
+    await store(payload, Customer)
 
     return response.status(StatusCodes.CREATED).json({ message: 'Created' })
   }
@@ -62,7 +60,7 @@ class CustomerController {
    * @param {Response} ctx.response
    */
   async show ({ params, response }) {
-    return response.json(await Customer.findOrFail(params.id))
+    return response.json(await show(params.id, Customer))
   }
 
   /**
@@ -83,9 +81,7 @@ class CustomerController {
       'user_id'
     ])
 
-    const customers = await Customer.findOrFail(params.id)
-    customers.merge(payload)
-    await customers.save()
+    await update(params.id, payload, Customer)
 
     return response.json({ message: 'Updated' })
   }
@@ -98,8 +94,7 @@ class CustomerController {
    * @param {Response} ctx.response
    */
   async destroy ({ params, response }) {
-    const customers = await Customer.findOrFail(params.id)
-    await customers.delete()
+    await destroy(params.id, Customer)
 
     return response.json({ message: 'Deleted' })
   }

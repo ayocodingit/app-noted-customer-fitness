@@ -5,6 +5,8 @@
 
 const { StatusCodes } = require('http-status-codes')
 const Achievement = use('App/Models/Achievement')
+const { paginate, store, show, update, destroy } = use('App/Controllers/Http/BaseController')
+
 
 /**
  * Resourceful controller for interacting with achievements
@@ -19,16 +21,13 @@ class AchievementController {
    * @param {Response} ctx.response
    */
   async index ({ request, response }) {
-    const page = request.input('page', 1)
-    const perPage = request.input('perPage', 50)
-
-    const achievements = Achievement.query()
+    const record = Achievement.query()
 
     if (request.input('customer_id')) {
-      achievements.where('customer_id', request.input('customer_id'))
+      record.where('customer_id', request.input('customer_id'))
     }
 
-    return response.json(await achievements.paginate(page, perPage))
+    return response.json(await paginate(request, record))
   }
 
   /**
@@ -53,7 +52,7 @@ class AchievementController {
       'customer_id'
     ])
 
-    await Achievement.create(payload)
+    await store(payload, Achievement)
 
     return response.status(StatusCodes.CREATED).json({ message: 'Created' })
   }
@@ -66,7 +65,7 @@ class AchievementController {
    * @param {Response} ctx.response
    */
   async show ({ params, response }) {
-    return response.json(await Achievement.findOrFail(params.id))
+    return response.json(await show(params.id, Achievement))
   }
 
   /**
@@ -91,9 +90,7 @@ class AchievementController {
       'customer_id'
     ])
 
-    const achievements = await Achievement.findOrFail(params.id)
-    achievements.merge(payload)
-    await achievements.save()
+    await update(params.id, payload, Achievement)
 
     return response.json({ message: 'Updated' })
   }
