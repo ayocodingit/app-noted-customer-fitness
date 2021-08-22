@@ -22,7 +22,7 @@ class CustomerController {
   async index ({ request, response }) {
     const record = Customer.query().whereBy('name', request.input('name'))
 
-    return response.json(await paginate(request, record))
+    return await paginate(request, record)
   }
 
   /**
