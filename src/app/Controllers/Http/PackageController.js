@@ -5,7 +5,7 @@
 
 const { StatusCodes } = require('http-status-codes')
 const Package = use('App/Models/Package')
-const { paginate, store, show, update, destroy, where } = use('App/Controllers/Http/BaseController')
+const { paginate, store, show, update, destroy } = use('App/Controllers/Http/BaseController')
 
 /**
  * Resourceful controller for interacting with packages
@@ -20,9 +20,7 @@ class PackageController {
    * @param {Response} ctx.response
    */
   async index ({ request, response }) {
-    const record = Package.query()
-
-    where('name', request.input('name'), record)
+    const record = Package.query().whereBy('name', request.input('name'))
 
     return response.json(await paginate(request, record))
   }
