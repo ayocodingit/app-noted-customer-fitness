@@ -19,9 +19,7 @@ class AchievementController {
    * @param {Request} ctx.request
    */
   async index ({ request }) {
-    const record = Achievement.query().whereBy('customer_id', request.input('customer_id'))
-
-    return await paginate(request, record)
+    return await paginate(request, Achievement.query().whereBy('customer_id', request.input('customer_id')))
   }
 
   /**
