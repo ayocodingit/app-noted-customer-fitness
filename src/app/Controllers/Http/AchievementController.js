@@ -24,9 +24,7 @@ class AchievementController {
     const record = Achievement.query()
     const customerId = request.input('customer_id')
 
-    if (customerId) {
-      record.where('customer_id', customerId)
-    }
+    where('customer_id', customerId, record)
 
     return response.json(await paginate(request, record))
   }

@@ -20,11 +20,10 @@ class CustomerController {
    * @param {Response} ctx.response
    */
   async index ({ request, response }) {
-    const record = Customer.query()
+    let record = Customer.query()
     const name = request.input('name')
-    if (name) {
-      record.where('name', name)
-    }
+
+    record = where('name', name, record)
 
     return response.json(await paginate(request, record))
   }

@@ -26,10 +26,17 @@ const destroy = async (id, model) => {
   return { message: 'Deleted' }
 }
 
+const where = async (key, value, model) => {
+  if (value) {
+    model.where(key, value)
+  }
+}
+
 module.exports = {
   paginate,
   store,
   show,
   update,
-  destroy
+  destroy,
+  where
 }

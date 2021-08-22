@@ -5,7 +5,7 @@
 
 const { StatusCodes } = require('http-status-codes')
 const Package = use('App/Models/Package')
-const { paginate, store, show, update, destroy } = use('App/Controllers/Http/BaseController')
+const { paginate, store, show, update, destroy, where } = use('App/Controllers/Http/BaseController')
 
 
 /**
@@ -24,9 +24,7 @@ class PackageController {
     const record = Package.query()
     const name = request.input('name')
 
-    if (name) {
-      record.where('name', name)
-    }
+    where('name', name, record)
 
     return response.json(await paginate(request, record))
   }
