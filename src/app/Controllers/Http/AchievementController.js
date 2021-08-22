@@ -5,7 +5,7 @@
 
 const { StatusCodes } = require('http-status-codes')
 const Achievement = use('App/Models/Achievement')
-const { paginate, store, show, update, destroy } = use('App/Controllers/Http/BaseController')
+const { paginate, store, show, update } = use('App/Controllers/Http/BaseController')
 
 
 /**
@@ -62,10 +62,10 @@ class AchievementController {
    * GET achievements/:id
    *
    * @param {object} ctx
-   * @param {Response} ctx.response
+   * @param {Params} ctx.params
    */
-  async show ({ params, response }) {
-    return response.json(await show(params.id, Achievement))
+  async show ({ params }) {
+    return await show(params.id, Achievement)
   }
 
   /**

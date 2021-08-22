@@ -21,7 +21,6 @@ class CustomerController {
    */
   async index ({ request, response }) {
     const record = Customer.query()
-
     if (request.input('name')) {
       record.where('name', request.input('name'))
     }
@@ -57,10 +56,10 @@ class CustomerController {
    * GET customers/:id
    *
    * @param {object} ctx
-   * @param {Response} ctx.response
+   * @param {Params} ctx.params
    */
-  async show ({ params, response }) {
-    return response.json(await show(params.id, Customer))
+  async show ({ params }) {
+    return await show(params.id, Customer)
   }
 
   /**
