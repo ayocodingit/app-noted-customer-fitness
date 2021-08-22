@@ -4,7 +4,7 @@
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 
 const { StatusCodes } = require('http-status-codes')
-const Package = use('App/Models/Package')
+const Packages = use('App/Models/Package')
 
 /**
  * Resourceful controller for interacting with packages
@@ -22,13 +22,13 @@ class PackageController {
     const page = request.input('page', 1)
     const perPage = request.input('perPage', 50)
 
-    const record = Package.query()
+    const package = Packages.query()
 
     if (request.input('name')) {
-      record.where('name', request.input('name'))
+      package.where('name', request.input('name'))
     }
 
-    return response.json(await record.paginate(page, perPage))
+    return response.json(await package.paginate(page, perPage))
   }
 
   /**
@@ -47,7 +47,7 @@ class PackageController {
       'number_of_drink'
     ])
 
-    await Package.create(payload)
+    await Packages.create(payload)
 
     return response.status(StatusCodes.CREATED).json({ message: 'Created' })
   }
@@ -60,7 +60,7 @@ class PackageController {
    * @param {Response} ctx.response
    */
   async show ({ params, response }) {
-    return response.json(await Package.findOrFail(params.id))
+    return response.json(await Packages.findOrFail(params.id))
   }
 
   /**
@@ -79,9 +79,9 @@ class PackageController {
       'number_of_drink'
     ])
 
-    const record = await Package.findOrFail(params.id)
-    record.merge(payload)
-    await record.save()
+    const package = await Packages.findOrFail(params.id)
+    package.merge(payload)
+    await package.save()
 
     return response.json({ message: 'Updated' })
   }
@@ -94,8 +94,8 @@ class PackageController {
    * @param {Response} ctx.response
    */
   async destroy ({ params, response }) {
-    const record = await Package.findOrFail(params.id)
-    await record.delete()
+    const package = await Packages.findOrFail(params.id)
+    await package.delete()
 
     return response.json({ message: 'Deleted' })
   }
