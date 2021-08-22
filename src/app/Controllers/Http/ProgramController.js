@@ -5,6 +5,7 @@
 
 const { StatusCodes } = require('http-status-codes')
 const Program = use('App/Models/Program')
+const { paginate, store } = use('App/Controllers/Http/BaseController')
 
 /**
  * Resourceful controller for interacting with programs
@@ -19,18 +20,15 @@ class ProgramController {
    * @param {Response} ctx.response
    */
   async index ({ request, response }) {
-    const page = request.input('page', 1)
-    const perPage = request.input('perPage', 50)
-
-    const programs = Program.query().with('customer')
+    const record = Program.query().with('customer')
 
     if (request.input('name')) {
-      programs.whereHas('customer', query => {
+      record.whereHas('customer', query => {
         query.where('name', request.input('name'))
       })
     }
 
-    return response.json(await programs.paginate(page, perPage))
+    return response.json(await paginate(request, record))
   }
 
   /**
@@ -47,7 +45,7 @@ class ProgramController {
       'package_id'
     ])
 
-    await Program.create(payload)
+    await store(payload, Program)
 
     return response.status(StatusCodes.CREATED).json({ message: 'Created' })
   }

@@ -5,6 +5,8 @@
 
 const { StatusCodes } = require('http-status-codes')
 const Package = use('App/Models/Package')
+const { paginate, store, show, update, destroy } = use('App/Controllers/Http/BaseController')
+
 
 /**
  * Resourceful controller for interacting with packages
@@ -19,16 +21,13 @@ class PackageController {
    * @param {Response} ctx.response
    */
   async index ({ request, response }) {
-    const page = request.input('page', 1)
-    const perPage = request.input('perPage', 50)
-
-    const packages = Package.query()
+    const record = Package.query()
 
     if (request.input('name')) {
-      packages.where('name', request.input('name'))
+      record.where('name', request.input('name'))
     }
 
-    return response.json(await packages.paginate(page, perPage))
+    return response.json(await paginate(request, record))
   }
 
   /**
@@ -47,7 +46,7 @@ class PackageController {
       'number_of_drink'
     ])
 
-    await Package.create(payload)
+    await store(payload, Package)
 
     return response.status(StatusCodes.CREATED).json({ message: 'Created' })
   }
@@ -57,10 +56,10 @@ class PackageController {
    * GET packages/:id
    *
    * @param {object} ctx
-   * @param {Response} ctx.response
+   * @param {Params} ctx.params
    */
-  async show ({ params, response }) {
-    return response.json(await Package.findOrFail(params.id))
+  async show ({ params }) {
+    return await show(params.id, Package)
   }
 
   /**
@@ -79,9 +78,7 @@ class PackageController {
       'number_of_drink'
     ])
 
-    const packages = await Package.findOrFail(params.id)
-    packages.merge(payload)
-    await packages.save()
+    await update(params.id, payload, Package)
 
     return response.json({ message: 'Updated' })
   }
@@ -94,8 +91,7 @@ class PackageController {
    * @param {Response} ctx.response
    */
   async destroy ({ params, response }) {
-    const packages = await Package.findOrFail(params.id)
-    await packages.delete()
+    await destroy(params.id, Package)
 
     return response.json({ message: 'Deleted' })
   }
