@@ -6,7 +6,7 @@ class Achievement extends Model {
   static boot () {
     super.boot()
     this.addTrait('WhereBy')
-    this.addHook('afterCreate', 'AchievementHook.program')
+    this.addHook('afterCreate', 'AchievementHook.updateNumberOfDrinkProgram')
   }
 
   customer () {

@@ -1,8 +1,6 @@
 'use strict'
 
 const { test, trait } = use('Test/Suite')('Customer')
-const Customer = use('App/Models/Customer')
-const Factory = use('Factory')
 const User = use('App/Models/User')
 
 trait('Test/ApiClient')
