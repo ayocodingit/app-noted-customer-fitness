@@ -4,8 +4,8 @@ const _ = require('lodash')
 
 class WhereBy {
   register (Model) {
-    const defaultOptions = {useCamelCase: true}
-    _.extend({}, {defaultOptions})
+    const defaultOptions = { useCamelCase: true }
+    _.extend({}, { defaultOptions })
 
     Model.queryMacro('whereBy', function (key, value) {
       if (value) {
