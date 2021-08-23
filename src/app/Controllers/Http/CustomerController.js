@@ -19,7 +19,7 @@ class CustomerController {
    * @param {Request} ctx.request
    */
   async index ({ request }) {
-    const record = Customer
+    let record = Customer
       .query()
       .whereBy('name', request.input('name'))
     return await paginate(request, record)

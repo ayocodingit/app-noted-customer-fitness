@@ -19,7 +19,7 @@ class AchievementController {
    * @param {Request} ctx.request
    */
   async index ({ request }) {
-    const record = Achievement
+    let record = Achievement
       .query()
       .whereBy('customer_id', request.input('customer_id'))
 
