@@ -22,7 +22,6 @@ class AchievementController {
     const record = Achievement
       .query()
       .whereBy('customer_id', request.input('customer_id'))
-
     return await paginate(request, record)
   }
 
