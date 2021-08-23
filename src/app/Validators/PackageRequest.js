@@ -1,7 +1,7 @@
 'use strict'
 
 const Antl = use('Antl')
-const failResponse = use('App/Validators/ResponseRequest')
+const failResponse = use('App/Validators/FailResponse')
 
 class PackageRequest {
   get validateAll () {
@@ -34,7 +34,7 @@ class PackageRequest {
   }
 
   async fails (errorMessages) {
-    return failResponse(errorMessages)
+    return failResponse(this.ctx, errorMessages)
   }
 }
 

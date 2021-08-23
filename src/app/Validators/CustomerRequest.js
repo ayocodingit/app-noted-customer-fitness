@@ -2,7 +2,7 @@
 
 const Antl = use('Antl')
 const Exists = use('App/Validators/Rules/Exists')
-const failResponse = use('App/Validators/ResponseRequest')
+const failResponse = use('App/Validators/FailResponse')
 
 class CustomerRequest {
   constructor () {
@@ -44,7 +44,7 @@ class CustomerRequest {
   }
 
   async fails (errorMessages) {
-    return failResponse(errorMessages)
+    return failResponse(this.ctx, errorMessages)
   }
 }
 

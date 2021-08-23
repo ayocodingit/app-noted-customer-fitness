@@ -2,8 +2,8 @@
 
 const { StatusCodes } = require('http-status-codes')
 
-module.exports = (errorMessages) => {
-  return this.ctx.response
+module.exports = (ctx, errorMessages) => {
+  return ctx.response
     .status(StatusCodes.UNPROCESSABLE_ENTITY)
     .json({ errors: errorMessages })
 }

@@ -2,7 +2,7 @@
 
 const Antl = use('Antl')
 const Exists = use('App/Validators/Rules/Exists')
-const failResponse = use('App/Validators/ResponseRequest')
+const failResponse = use('App/Validators/FailResponse')
 
 class ProgramRequest {
   constructor () {
@@ -33,7 +33,7 @@ class ProgramRequest {
   }
 
   async fails (errorMessages) {
-    return failResponse(errorMessages)
+    return failResponse(this.ctx, errorMessages)
   }
 }
 
