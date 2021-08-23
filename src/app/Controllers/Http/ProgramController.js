@@ -28,7 +28,7 @@ class ProgramController {
       })
     }
 
-    return response.json(await paginate(request, record))
+    return await paginate(request, record)
   }
 
   /**
