@@ -15,6 +15,14 @@ class BaseEnum {
 
     return enums
   }
+
+  getString (option) {
+    return this.getArray(option).toString()
+  }
+
+  getStringWithSpace (option) {
+    return this.getArray(option).join(', ')
+  }
 }
 
 module.exports = BaseEnum
