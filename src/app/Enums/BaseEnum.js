@@ -4,12 +4,12 @@ const Enum = require('enum')
 
 class BaseEnum {
   constructor (enums) {
-    this.enum = new Enum(enums)
+    this.enums = new Enum(enums)
   }
 
   getArray (option) {
     const enums = []
-    this.enum.enums.forEach(function (enumItem) {
+    this.enums.enums.forEach(function (enumItem) {
       enums.push(enumItem[option])
     })
 
