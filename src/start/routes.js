@@ -25,20 +25,20 @@ Route.group(() => {
   Route.get('/', 'HomeController.index')
   Route.post('refresh-token', 'AuthController.refreshToken')
   Route.post('update-password', 'AuthController.updatePassword')
-  ResourceRoute('customers', 'CustomerController', [
+  Resource('customers', 'CustomerController', [
     [['customers.store'], ['CustomerRequest']],
     [['customers.update'], ['CustomerRequest']]
   ])
-  ResourceRoute('packages', 'PackageController', [
+  Resource('packages', 'PackageController', [
     [['packages.store'], ['PackageRequest']],
     [['packages.update'], ['PackageRequest']]
   ])
-  ResourceRoute('achievements', 'AchievementController', [
+  Resource('achievements', 'AchievementController', [
     [['achievements.store'], ['AchievementRequest']],
     [['achievements.update'], ['AchievementRequest']]
   ])
-  ResourceRoute('programs', 'ProgramController', [
+  Resource('programs', 'ProgramController', [
     [['programs.store'], ['ProgramRequest']]
   ])
-  .only(['index', 'store'])
+    .only(['index', 'store'])
 }).prefix('api').middleware('auth')
