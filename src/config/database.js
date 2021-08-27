@@ -57,7 +57,11 @@ module.exports = {
       password: Env.get('DB_PASSWORD', ''),
       database: Env.get('DB_DATABASE', 'adonis')
     },
-    debug: Env.get('DB_DEBUG', false)
+    debug: Env.get('DB_DEBUG', false),
+    pool: {
+      min: Number(Env.get('DB_POOL_MIN', 10)),
+      max: Number(Env.get('DB_POOL_MAX', 100))
+    }
   },
 
   /*
@@ -79,6 +83,10 @@ module.exports = {
       password: Env.get('DB_PASSWORD', ''),
       database: Env.get('DB_DATABASE', 'adonis')
     },
-    debug: Env.get('DB_DEBUG', false)
+    debug: Env.get('DB_DEBUG', false),
+    pool: {
+      min: Number(Env.get('DB_POOL_MIN', 10)),
+      max: Number(Env.get('DB_POOL_MAX', 100))
+    }
   }
 }
