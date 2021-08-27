@@ -1,18 +1,38 @@
 version: '3'
 services:
-  backend:
+  adonis-mysql:
+    image: mysql
+    container_name: "${APP_NAME}_MYSQL"
+    ports:
+      - "${DB_PORT}:3306"
+    volumes:
+      - $PWD/data:/var/lib/mysql
+    restart: 'always'
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    command: --default-authentication-plugin=mysql_native_password
+    networks:
+      - adonis-network
+
+  adonis-app:
     build:
       context: .
       dockerfile: docker/dockerfile
     restart: always
-    container_name: adonis
-    tty: true
+    container_name: "${APP_NAME}_APP"
     env_file:
       - src/.env
+    environment:
+      DB_HOST: adonis-mysql
     ports:
-      - 3333:3333
+      - "${PORT}:${PORT}"
+    depends_on:
+      - adonis-mysql
     networks:
-      - gateway
-
+      - adonis-network
+  
 networks:
-  gateway:
+  adonis-network:

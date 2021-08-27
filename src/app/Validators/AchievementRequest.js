@@ -1,8 +1,8 @@
 'use strict'
 
 const Antl = use('Antl')
-const Exists = use('App/Validators/Rules/Exists')
-const failResponse = use('App/Validators/FailResponse')
+const Exists = use('utils/Validators/Rules/Exists')
+const { failResponse } = use('utils/Validators')
 
 class AchievementRequest {
   constructor () {

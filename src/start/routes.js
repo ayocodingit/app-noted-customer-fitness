@@ -15,7 +15,7 @@
 
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
-const ResourceRoute = require('./ResourceRoute')
+const { Resource } = use('utils/Routes')
 
 Route.get('/', 'HomeController.index')
 
@@ -40,5 +40,5 @@ Route.group(() => {
   ResourceRoute('programs', 'ProgramController', [
     [['programs.store'], ['ProgramRequest']]
   ])
-    .only(['index', 'store'])
+  .only(['index', 'store'])
 }).prefix('api').middleware('auth')

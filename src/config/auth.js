@@ -1,15 +1,6 @@
 'use strict'
 
-/** @type {import('@adonisjs/framework/src/Env')} */
-const Env = use('Env')
-
-const getBuffer = (secret) => {
-  if (Env.get('JWT_ALGORITHM') === 'RS256') {
-    return Buffer.from(secret.replace(/\\n/g, '\n'), 'utf8')
-  }
-
-  return secret
-}
+const { jwtConfig } = use('utils/Jwt')
 
 module.exports = {
   /*
@@ -77,14 +68,9 @@ module.exports = {
     serializer: 'lucid',
     model: 'App/Models/User',
     scheme: 'jwt',
-    uid: 'username',
+    uid: 'email',
     password: 'password',
-    options: {
-      algorithm: Env.get('JWT_ALGORITHM', 'HS256'),
-      secret: getBuffer(Env.get('JWT_SECRET', Env.get('APP_KEY'))),
-      // public: getBuffer(Env.get('JWT_PUBLIC')),
-      expiresIn: 3600
-    }
+    options: jwtConfig
   },
 
   /*

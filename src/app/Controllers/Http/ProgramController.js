@@ -5,7 +5,7 @@
 
 const { StatusCodes } = require('http-status-codes')
 const Program = use('App/Models/Program')
-const { paginate, store } = use('App/Controllers/Http/BaseController')
+const { paginate, store } = use('utils/Models')
 
 /**
  * Resourceful controller for interacting with programs

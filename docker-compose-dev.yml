@@ -4,12 +4,10 @@ services:
   adonis-mysql:
     image: mysql
     container_name: "${APP_NAME}_MYSQL"
-    platform: 'linux/x86_64'
     ports:
       - '3366:3306'
     volumes:
       - $PWD/data:/var/lib/mysql
-    restart: 'always'
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
       MYSQL_DATABASE: ${DB_DATABASE}
@@ -19,32 +17,17 @@ services:
     networks:
       - adonis-network
 
-  adonis-phpmyadmin:
-    container_name: "${APP_NAME}_PMA"
-    image: phpmyadmin/phpmyadmin
-    depends_on:
-      - adonis-mysql
-    environment:
-      PMA_HOST: adonis-mysql
-    ports:
-      - '8585:80'
-    restart: 'always'
-    volumes:
-      - /phpmyadmin
-    networks:
-      - adonis-network
-
   adonis-app:
     container_name: "${APP_NAME}_APP"
     build:
       context: .
-      dockerfile: dockerfile-dev
+      dockerfile: docker/dockerfile-dev
     volumes:
-      - src/:/app
+      - ./src:/app
       - /app/node_modules
-    restart: 'always'
     environment:
       PORT: 3330
+      DB_HOST: adonis-mysql
     env_file:
       - src/.env
     ports:

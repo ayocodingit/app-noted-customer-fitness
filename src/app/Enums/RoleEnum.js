@@ -1,8 +1,8 @@
 'use strict'
 
-const BaseEnum = use('App/Enums/BaseEnum')
+const Enum = use('utils/Enum')
 
-module.exports = new BaseEnum({
+module.exports = new Enum({
   ADMIN: 'admin',
   CUSTOMER: 'customer'
 })
