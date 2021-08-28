@@ -34,7 +34,7 @@ class AchievementRequest {
   }
 
   get messages () {
-    return {
+    return Object.assign({
       'weight.required': Antl.formatMessage('validation.required', { attribute: 'weight' }),
       'body_fat.required': Antl.formatMessage('validation.required', { attribute: 'body_fat' }),
       'body_water_range.required': Antl.formatMessage('validation.required', { attribute: 'body_water_range' }),
@@ -54,12 +54,17 @@ class AchievementRequest {
       'body_age.number': Antl.formatMessage('validation.number', { attribute: 'body_age' }),
       'bone_mass.number': Antl.formatMessage('validation.number', { attribute: 'bone_mass' }),
       'stomach_fat.number': Antl.formatMessage('validation.number', { attribute: 'stomach_fat' }),
+      'customer_id.exists': Antl.formatMessage('validation.exists', { attribute: 'customer_id' })
+    }, this.bodyRules())
+  }
+
+  bodyRules () {
+    return {
       'chest.number': Antl.formatMessage('validation.number', { attribute: 'chest' }),
       'waist.number': Antl.formatMessage('validation.number', { attribute: 'waist' }),
       'hip.number': Antl.formatMessage('validation.number', { attribute: 'hip' }),
       'thigh.number': Antl.formatMessage('validation.number', { attribute: 'thigh' }),
       'arm.number': Antl.formatMessage('validation.number', { attribute: 'arm' }),
-      'customer_id.exists': Antl.formatMessage('validation.exists', { attribute: 'customer_id' })
     }
   }
 
