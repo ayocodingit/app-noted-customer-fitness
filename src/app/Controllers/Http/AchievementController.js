@@ -5,7 +5,7 @@
 
 const { StatusCodes } = require('http-status-codes')
 const Achievement = use('App/Models/Achievement')
-const { paginate, store, show, update } = use('utils/Models')
+const { paginate, store, show, update, payload } = use('utils/Models')
 
 /**
  * Resourceful controller for interacting with achievements
@@ -34,9 +34,7 @@ class AchievementController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
-    const payload = request.only(Achievement.fillable())
-
-    await store(payload, Achievement)
+    await store(payload(request, Achievement), Achievement)
 
     return response.status(StatusCodes.CREATED).json({ message: 'Created' })
   }
@@ -61,9 +59,7 @@ class AchievementController {
    * @param {Response} ctx.response
    */
   async update ({ params, request, response }) {
-    const payload = request.only(Achievement.fillable())
-
-    await update(params.id, payload, Achievement)
+    await update(params.id, payload(request, Achievement), Achievement)
 
     return response.json({ message: 'Updated' })
   }

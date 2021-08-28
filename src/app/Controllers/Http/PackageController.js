@@ -5,12 +5,20 @@
 
 const { StatusCodes } = require('http-status-codes')
 const Package = use('App/Models/Package')
-const { paginate, store, show, update, destroy } = use('utils/Models')
+const { paginate, store, show, update, destroy, payload } = use('utils/Models')
 
 /**
  * Resourceful controller for interacting with packages
  */
 class PackageController {
+  /**
+   * Show a list of all packages.
+   * GET packages
+   *
+   * @param {object} ctx
+   * @param {Request} ctx.request
+   * @param {Response} ctx.response
+   */
   async index ({ request }) {
     const record = Package
       .query()
@@ -27,9 +35,7 @@ class PackageController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
-    const payload = request.only(Package.fillable())
-
-    await store(payload, Package)
+    await store(payload(request, Package), Package)
 
     return response.status(StatusCodes.CREATED).json({ message: 'Created' })
   }
@@ -54,9 +60,7 @@ class PackageController {
    * @param {Response} ctx.response
    */
   async update ({ params, request, response }) {
-    const payload = request.only(Package.fillable())
-
-    await update(params.id, payload, Package)
+    await update(params.id, payload(request, Package), Package)
 
     return response.json({ message: 'Updated' })
   }

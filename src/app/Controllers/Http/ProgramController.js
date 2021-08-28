@@ -5,7 +5,7 @@
 
 const { StatusCodes } = require('http-status-codes')
 const Program = use('App/Models/Program')
-const { paginate, store } = use('utils/Models')
+const { paginate, store, payload } = use('utils/Models')
 
 /**
  * Resourceful controller for interacting with programs
@@ -39,9 +39,7 @@ class ProgramController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
-    const payload = request.only(Program.fillable())
-
-    await store(payload, Program)
+    await store(payload(request, Program), Program)
 
     return response.status(StatusCodes.CREATED).json({ message: 'Created' })
   }

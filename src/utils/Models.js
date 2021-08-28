@@ -26,10 +26,15 @@ const destroy = async (id, model) => {
   return { message: 'Deleted' }
 }
 
+const payload = async (request, model) => {
+  return request.only(model.fillable())
+}
+
 module.exports = {
   paginate,
   store,
   show,
   update,
-  destroy
+  destroy,
+  payload
 }

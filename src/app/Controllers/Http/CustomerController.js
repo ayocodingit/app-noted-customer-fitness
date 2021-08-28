@@ -5,7 +5,7 @@
 
 const { StatusCodes } = require('http-status-codes')
 const Customer = use('App/Models/Customer')
-const { paginate, store, show, update, destroy } = use('utils/Models')
+const { paginate, store, show, update, destroy, payload } = use('utils/Models')
 
 /**
  * Resourceful controller for interacting with customers
@@ -34,9 +34,7 @@ class CustomerController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
-    const payload = request.only(Customer.fillable())
-
-    await store(payload, Customer)
+    await store(payload(request, Customer), Customer)
 
     return response.status(StatusCodes.CREATED).json({ message: 'Created' })
   }
@@ -61,9 +59,7 @@ class CustomerController {
    * @param {Response} ctx.response
    */
   async update ({ params, request, response }) {
-    const payload = request.only(Customer.fillable())
-
-    await update(params.id, payload, Customer)
+    await update(params.id, payload(request, Customer), Customer)
 
     return response.json({ message: 'Updated' })
   }
