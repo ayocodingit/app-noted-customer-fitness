@@ -34,14 +34,7 @@ class CustomerController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
-    const payload = request.only([
-      'name',
-      'age',
-      'height',
-      'address',
-      'phone_number',
-      'user_id'
-    ])
+    const payload = request.only(Customer.fillable())
 
     await store(payload, Customer)
 
@@ -68,14 +61,7 @@ class CustomerController {
    * @param {Response} ctx.response
    */
   async update ({ params, request, response }) {
-    const payload = request.only([
-      'name',
-      'age',
-      'height',
-      'address',
-      'phone_number',
-      'user_id'
-    ])
+    const payload = request.only(Customer.fillable())
 
     await update(params.id, payload, Customer)
 

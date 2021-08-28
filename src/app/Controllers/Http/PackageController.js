@@ -34,12 +34,7 @@ class PackageController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
-    const payload = request.only([
-      'name',
-      'description',
-      'price',
-      'number_of_drink'
-    ])
+    const payload = request.only(Package.fillable())
 
     await store(payload, Package)
 
@@ -66,12 +61,7 @@ class PackageController {
    * @param {Response} ctx.response
    */
   async update ({ params, request, response }) {
-    const payload = request.only([
-      'name',
-      'description',
-      'price',
-      'number_of_drink'
-    ])
+    const payload = request.only(Package.fillable())
 
     await update(params.id, payload, Package)
 

@@ -17,9 +17,8 @@ class ProgramController {
    *
    * @param {object} ctx
    * @param {Request} ctx.request
-   * @param {Response} ctx.response
    */
-  async index ({ request, response }) {
+  async index ({ request }) {
     const record = Program.query().with('customer')
 
     if (request.input('name')) {
@@ -40,10 +39,7 @@ class ProgramController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
-    const payload = request.only([
-      'customer_id',
-      'package_id'
-    ])
+    const payload = request.only(Program.fillable())
 
     await store(payload, Program)
 

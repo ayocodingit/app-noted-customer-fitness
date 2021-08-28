@@ -34,23 +34,7 @@ class AchievementController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
-    const payload = request.only([
-      'weight',
-      'body_fat',
-      'body_water_range',
-      'muscle_mass',
-      'physique_rating',
-      'bmr',
-      'body_age',
-      'bone_mass',
-      'stomach_fat',
-      'chest',
-      'waist',
-      'hip',
-      'thigh',
-      'arm',
-      'customer_id'
-    ])
+    const payload = request.only(Achievement.fillable())
 
     await store(payload, Achievement)
 
@@ -77,23 +61,7 @@ class AchievementController {
    * @param {Response} ctx.response
    */
   async update ({ params, request, response }) {
-    const payload = request.only([
-      'weight',
-      'body_fat',
-      'body_water_range',
-      'muscle_mass',
-      'physique_rating',
-      'bmr',
-      'body_age',
-      'bone_mass',
-      'stomach_fat',
-      'chest',
-      'waist',
-      'hip',
-      'thigh',
-      'arm',
-      'customer_id'
-    ])
+    const payload = request.only(Achievement.fillable())
 
     await update(params.id, payload, Achievement)
 

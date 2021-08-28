@@ -29,7 +29,7 @@ class AchievementRequest {
       hip: 'number',
       thigh: 'number',
       arm: 'number',
-      customer_id: 'required|exists:programs,customer_id',
+      customer_id: 'required|exists:programs,customer_id'
     }
   }
 
@@ -64,7 +64,7 @@ class AchievementRequest {
       'waist.number': Antl.formatMessage('validation.number', { attribute: 'waist' }),
       'hip.number': Antl.formatMessage('validation.number', { attribute: 'hip' }),
       'thigh.number': Antl.formatMessage('validation.number', { attribute: 'thigh' }),
-      'arm.number': Antl.formatMessage('validation.number', { attribute: 'arm' }),
+      'arm.number': Antl.formatMessage('validation.number', { attribute: 'arm' })
     }
   }
 
