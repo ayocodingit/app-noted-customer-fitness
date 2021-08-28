@@ -19,6 +19,8 @@ class Achievement extends Model {
       'hip',
       'thigh',
       'arm',
+      'date',
+      'package_id',
       'customer_id'
     ]
   }

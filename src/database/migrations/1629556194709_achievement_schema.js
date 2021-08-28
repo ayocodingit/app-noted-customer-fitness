@@ -21,6 +21,8 @@ class AchievementSchema extends Schema {
       table.float('hip')
       table.float('thigh')
       table.float('arm')
+      table.date('date').notNullable()
+      table.bigInteger('package_id').index().unsigned().references('id').inTable('packages').onDelete('CASCADE')
       table.bigInteger('customer_id').notNullable().index().unsigned().references('id').inTable('customers').onDelete('CASCADE')
       table.timestamps()
     })
