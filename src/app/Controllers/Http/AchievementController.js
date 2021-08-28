@@ -3,7 +3,6 @@
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 
-const { StatusCodes } = require('http-status-codes')
 const Achievement = use('App/Models/Achievement')
 const { paginate, store, show, update, payload } = use('utils/Models')
 
@@ -34,9 +33,7 @@ class AchievementController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
-    await store(await payload(request, Achievement), Achievement)
-
-    return response.status(StatusCodes.CREATED).json({ message: 'Created' })
+    return await store(await payload(request, Achievement), Achievement, response)
   }
 
   /**
