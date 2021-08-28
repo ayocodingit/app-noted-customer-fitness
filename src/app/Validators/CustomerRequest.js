@@ -1,7 +1,7 @@
 'use strict'
 
 const Antl = use('Antl')
-const Exists = use('utils/Validators/Rules/Exists')
+const Exists = use('utils/Rules/Exists')
 const { failResponse } = use('utils/Validators')
 
 class CustomerRequest {
