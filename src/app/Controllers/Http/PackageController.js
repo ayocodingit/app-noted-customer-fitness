@@ -3,7 +3,6 @@
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 
-const { StatusCodes } = require('http-status-codes')
 const Package = use('App/Models/Package')
 const { paginate, store, show, update, destroy, payload } = use('utils/Models')
 
@@ -27,9 +26,7 @@ class PackageController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
-    await store(await payload(request, Package), Package)
-
-    return response.status(StatusCodes.CREATED).json({ message: 'Created' })
+    return await store(await payload(request, Package), Package, response)
   }
 
   /**

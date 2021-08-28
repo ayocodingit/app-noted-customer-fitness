@@ -1,4 +1,5 @@
 'use strict'
+const { StatusCodes } = require('http-status-codes')
 
 const paginate = async (request, model) => {
   const page = request.input('page', 1)
@@ -6,8 +7,9 @@ const paginate = async (request, model) => {
   return await model.paginate(page, perPage)
 }
 
-const store = async (payload, model) => {
-  return await model.create(payload)
+const store = async (payload, model, response) => {
+  await model.create(payload)
+  return response.status(StatusCodes.CREATED).json({ message: 'Created' })
 }
 
 const show = async (id, model) => {
