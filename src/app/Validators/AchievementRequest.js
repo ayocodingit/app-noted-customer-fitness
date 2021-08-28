@@ -29,7 +29,9 @@ class AchievementRequest {
       hip: 'number',
       thigh: 'number',
       arm: 'number',
-      customer_id: 'required|exists:programs,customer_id'
+      date: 'required|date',
+      package_id: 'integer|exists:packages,id',
+      customer_id: 'required|integer|exists:programs,customer_id'
     }
   }
 
