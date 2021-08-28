@@ -39,7 +39,7 @@ class ProgramController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
-    await store(payload(request, Program), Program)
+    await store(await payload(request, Program), Program)
 
     return response.status(StatusCodes.CREATED).json({ message: 'Created' })
   }

@@ -34,7 +34,7 @@ class AchievementController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
-    await store(payload(request, Achievement), Achievement)
+    await store(await payload(request, Achievement), Achievement)
 
     return response.status(StatusCodes.CREATED).json({ message: 'Created' })
   }
@@ -59,7 +59,7 @@ class AchievementController {
    * @param {Response} ctx.response
    */
   async update ({ params, request, response }) {
-    await update(params.id, payload(request, Achievement), Achievement)
+    await update(params.id, await payload(request, Achievement), Achievement)
 
     return response.json({ message: 'Updated' })
   }

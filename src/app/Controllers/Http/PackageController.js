@@ -11,14 +11,6 @@ const { paginate, store, show, update, destroy, payload } = use('utils/Models')
  * Resourceful controller for interacting with packages
  */
 class PackageController {
-  /**
-   * Show a list of all packages.
-   * GET packages
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   */
   async index ({ request }) {
     const record = Package
       .query()
@@ -35,7 +27,7 @@ class PackageController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
-    await store(payload(request, Package), Package)
+    await store(await payload(request, Package), Package)
 
     return response.status(StatusCodes.CREATED).json({ message: 'Created' })
   }
@@ -60,7 +52,7 @@ class PackageController {
    * @param {Response} ctx.response
    */
   async update ({ params, request, response }) {
-    await update(params.id, payload(request, Package), Package)
+    await update(params.id, await payload(request, Package), Package)
 
     return response.json({ message: 'Updated' })
   }
