@@ -11,12 +11,6 @@ const { paginate, store, show, update, destroy } = use('utils/Models')
  * Resourceful controller for interacting with packages
  */
 class PackageController {
-  /**
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   */
   async index ({ request }) {
     const record = Package
       .query()
