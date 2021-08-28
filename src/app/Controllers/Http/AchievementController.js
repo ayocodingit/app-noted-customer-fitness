@@ -44,6 +44,11 @@ class AchievementController {
       'body_age',
       'bone_mass',
       'stomach_fat',
+      'chest',
+      'waist',
+      'hip',
+      'thigh',
+      'arm',
       'customer_id'
     ])
 
@@ -82,6 +87,11 @@ class AchievementController {
       'body_age',
       'bone_mass',
       'stomach_fat',
+      'chest',
+      'waist',
+      'hip',
+      'thigh',
+      'arm',
       'customer_id'
     ])
 

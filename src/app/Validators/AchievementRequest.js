@@ -24,7 +24,12 @@ class AchievementRequest {
       body_age: 'required|number',
       bone_mass: 'required|number',
       stomach_fat: 'required|number',
-      customer_id: 'required|exists:programs,customer_id'
+      chest: 'number',
+      waist: 'number',
+      hip: 'number',
+      thigh: 'number',
+      arm: 'number',
+      customer_id: 'required|exists:programs,customer_id',
     }
   }
 
@@ -49,6 +54,11 @@ class AchievementRequest {
       'body_age.number': Antl.formatMessage('validation.number', { attribute: 'body_age' }),
       'bone_mass.number': Antl.formatMessage('validation.number', { attribute: 'bone_mass' }),
       'stomach_fat.number': Antl.formatMessage('validation.number', { attribute: 'stomach_fat' }),
+      'chest.number': Antl.formatMessage('validation.number', { attribute: 'chest' }),
+      'waist.number': Antl.formatMessage('validation.number', { attribute: 'waist' }),
+      'hip.number': Antl.formatMessage('validation.number', { attribute: 'hip' }),
+      'thigh.number': Antl.formatMessage('validation.number', { attribute: 'thigh' }),
+      'arm.number': Antl.formatMessage('validation.number', { attribute: 'arm' }),
       'customer_id.exists': Antl.formatMessage('validation.exists', { attribute: 'customer_id' })
     }
   }
