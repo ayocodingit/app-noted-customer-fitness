@@ -12,8 +12,6 @@ const { paginate, store, show, update, destroy } = use('utils/Models')
  */
 class PackageController {
   /**
-   * Show a list of all packages.
-   * GET packages
    *
    * @param {object} ctx
    * @param {Request} ctx.request
