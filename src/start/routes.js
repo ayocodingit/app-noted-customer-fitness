@@ -19,7 +19,7 @@ const { Resource } = use('utils/Routes')
 
 Route.get('/', 'HomeController.index')
 
-Route.post('login', 'AuthController.login').prefix('api').middleware('guest')
+Route.post('login', 'AuthController.login').prefix('api').middleware('guest').validator('LoginRequest')
 
 Route.group(() => {
   Route.get('/', 'HomeController.index')
