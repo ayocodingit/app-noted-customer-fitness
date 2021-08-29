@@ -5,6 +5,7 @@ const { responseToken } = use('utils/Jwt')
 const CustomException = use('App/Exceptions/CustomException')
 const { formatMessage } = use('Antl')
 const { StatusCodes } = require('http-status-codes')
+const { store, payload } = use('utils/Models')
 
 class AuthController {
   async login ({ request, response, auth }) {
@@ -16,6 +17,10 @@ class AuthController {
     } catch (error) {
       throw new CustomException(formatMessage('auth.failed'), StatusCodes.UNAUTHORIZED)
     }
+  }
+
+  async register ({ request, response }) {
+    return await store(await payload(request, User), User, response)
   }
 
   async refreshToken ({ request, response, auth }) {

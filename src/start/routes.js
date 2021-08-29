@@ -20,11 +20,13 @@ const { Resource } = use('utils/Routes')
 Route.get('/', 'HomeController.index')
 
 Route.post('login', 'AuthController.login').prefix('api').middleware('guest').validator('LoginRequest')
+Route.post('register', 'AuthController.register').prefix('api').middleware('guest').validator('RegisterRequest')
 
 Route.group(() => {
   Route.get('/', 'HomeController.index')
   Route.post('refresh-token', 'AuthController.refreshToken')
   Route.get('user', 'AuthController.user')
+  Route.get('user-role', 'UserController.index')
   Route.post('update-password', 'AuthController.updatePassword')
   Resource('customers', 'CustomerController', [
     [['customers.store'], ['CustomerRequest']],
