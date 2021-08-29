@@ -24,6 +24,7 @@ Route.post('login', 'AuthController.login').prefix('api').middleware('guest')
 Route.group(() => {
   Route.get('/', 'HomeController.index')
   Route.post('refresh-token', 'AuthController.refreshToken')
+  Route.get('user', 'AuthController.user')
   Route.post('update-password', 'AuthController.updatePassword')
   Resource('customers', 'CustomerController', [
     [['customers.store'], ['CustomerRequest']],
