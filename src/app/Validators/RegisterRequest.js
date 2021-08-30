@@ -19,7 +19,7 @@ class RegisterRequest {
   get messages () {
     return {
       'username.required': formatMessage('validation.required', { attribute: 'username' }),
-      'username.unique': formatMessage('validation.exists', { attribute: 'username' }),
+      'username.unique': formatMessage('validation.unique', { attribute: 'username' }),
       'password.required': formatMessage('validation.required', { attribute: 'password' }),
       'password.min': formatMessage('validation.min_numeric', { attribute: 'password', min: 6 }),
       'password_confirmation.required': formatMessage('validation.required', { attribute: 'password_confirmation' }),
