@@ -24,7 +24,8 @@ const providers = [
   '@adonisjs/mail/providers/MailProvider',
   '@adonisjs/framework/providers/ViewProvider',
   '@adonisjs/session/providers/SessionProvider',
-  '@adonisjs/shield/providers/ShieldProvider'
+  '@adonisjs/shield/providers/ShieldProvider',
+  'adonis-guard/providers/GuardProvider'
 ]
 
 /*

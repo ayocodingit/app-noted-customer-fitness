@@ -12,8 +12,3 @@ UserHook.password = async (modelInstance) => {
   }
 }
 
-UserHook.role = async (modelInstance) => {
-  if (!modelInstance.dirty.role) {
-    modelInstance.role = RoleEnum.enums.CUSTOMER.value
-  }
-}

@@ -31,6 +31,8 @@ $ make test
 * Run on locally with docker :
 
 ```
+install
+$ make docker-run-dev-install
 start
 $ make docker-run-dev
 migrate

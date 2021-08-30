@@ -28,6 +28,8 @@ Route.group(() => {
   Route.get('user', 'AuthController.user')
   Route.get('user-role', 'UserController.index')
   Route.post('update-password', 'AuthController.updatePassword')
+  Route.get('dashboard-admin', 'DashboardController.admin').middleware('can:admin')
+  Route.get('dashboard-customer', 'DashboardController.customer').middleware('can:customer')
   Resource('customers', 'CustomerController', [
     [['customers.store'], ['CustomerRequest']],
     [['customers.update'], ['CustomerRequest']]

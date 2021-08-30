@@ -16,7 +16,6 @@ class User extends Model {
     super.boot()
     this.addTrait('WhereBy')
     this.addHook('beforeSave', 'UserHook.password')
-    this.addHook('beforeCreate', 'UserHook.role')
   }
 
   static get hidden () {
@@ -35,6 +34,10 @@ class User extends Model {
    */
   tokens () {
     return this.hasMany('App/Models/Token')
+  }
+
+  customer () {
+    return this.hasOne('App/Models/Customer')
   }
 }
 
