@@ -1,4 +1,4 @@
-module.exports = (Model) => {
+const whereBy = (Model) => {
   Model.queryMacro('whereBy', function (key, value) {
     if (value) {
       this.where(key, value)
@@ -11,6 +11,9 @@ module.exports = (Model) => {
     }
     return this
   })
+}
+
+const whereDate = (Model) => {
   Model.queryMacro('whereDate', function (key, value) {
     if (value) {
       this.whereRaw(`DATE(${key}) = ${value}`)
@@ -23,6 +26,9 @@ module.exports = (Model) => {
     }
     return this
   })
+}
+
+const whereHas = (Model) => {
   Model.queryMacro('whereHasBy', function (relation, key, value) {
     if (value) {
       this.whereHas(relation, query => {
@@ -39,4 +45,10 @@ module.exports = (Model) => {
     }
     return this
   })
+}
+
+module.exports = (Model) => {
+  whereBy(Model)
+  whereDate(Model)
+  whereHas(Model)
 }
