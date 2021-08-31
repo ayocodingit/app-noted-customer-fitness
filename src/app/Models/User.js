@@ -14,7 +14,7 @@ class User extends Model {
 
   static boot () {
     super.boot()
-    this.addTrait('WhereBy')
+    this.addTrait('WhereCustom')
     this.addHook('beforeSave', 'UserHook.password')
   }
 

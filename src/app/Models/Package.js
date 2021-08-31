@@ -15,7 +15,7 @@ class Package extends Model {
 
   static boot () {
     super.boot()
-    this.addTrait('WhereBy')
+    this.addTrait('WhereCustom')
   }
 }
 

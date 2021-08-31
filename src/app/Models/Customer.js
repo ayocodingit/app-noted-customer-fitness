@@ -17,11 +17,15 @@ class Customer extends Model {
 
   static boot () {
     super.boot()
-    this.addTrait('WhereBy')
+    this.addTrait('WhereCustom')
   }
 
   program () {
     return this.hasOne('App/Models/Program')
+  }
+
+  user () {
+    return this.belongsTo('App/Models/User')
   }
 }
 

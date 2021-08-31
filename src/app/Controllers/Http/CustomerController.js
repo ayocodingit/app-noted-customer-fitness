@@ -20,7 +20,11 @@ class CustomerController {
   async index ({ request }) {
     const record = Customer
       .query()
-      .whereBy('name', request.input('name'))
+      .with('user')
+      .where(query => {
+        query.whereHasBy('user', 'username', request.input('search'))
+          .orWhereBy('name', request.input('search'))
+      })
     return await paginate(request, record)
   }
 

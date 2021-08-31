@@ -2,8 +2,6 @@
 
 /** @type {import('@adonisjs/framework/src/Hash')} */
 const Hash = use('Hash')
-const RoleEnum = use('App/Enums/RoleEnum')
-
 const UserHook = exports = module.exports = {}
 
 UserHook.password = async (modelInstance) => {
@@ -11,4 +9,3 @@ UserHook.password = async (modelInstance) => {
     modelInstance.password = await Hash.make(modelInstance.password)
   }
 }
-
