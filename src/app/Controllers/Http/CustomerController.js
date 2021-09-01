@@ -25,6 +25,8 @@ class CustomerController {
         query.whereHasBy('user', 'username', request.input('search'))
           .orWhereBy('name', request.input('search'))
       })
+      .whereDate('created_at', '2021-08-28')
+      console.log(record.toSQL());
     return await paginate(request, record)
   }
 
