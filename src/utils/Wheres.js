@@ -1,3 +1,5 @@
+'use scrict'
+
 const when = (Model) => {
   Model.queryMacro('when', function (value, callback) {
     if (value) {
@@ -24,9 +26,9 @@ const whereBy = (Model) => {
 }
 
 const whereDate = (Model) => {
-  Model.queryMacro('whereDate', function (key, value) {
+  Model.queryMacro('whereDate', function (key, value, operator = '=') {
     this.when(value, query => {
-      query.whereRaw(`DATE(${key}) = ${value}`)
+      query.whereRaw(`DATE(${key}) ${operator} ${value}`)
     })
     return this
   })
