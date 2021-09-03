@@ -3,7 +3,7 @@
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model')
 class Program extends Model {
-  static fillable () {
+  static get fillable () {
     return [
       'customer_id',
       'package_id'

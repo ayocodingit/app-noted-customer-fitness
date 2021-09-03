@@ -4,7 +4,7 @@
 const Model = use('Model')
 
 class Package extends Model {
-  static fillable () {
+  static get fillable () {
     return [
       'name',
       'description',

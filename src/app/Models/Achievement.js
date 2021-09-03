@@ -3,7 +3,7 @@
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model')
 class Achievement extends Model {
-  static fillable () {
+  static get fillable () {
     return [
       'weight',
       'body_fat',

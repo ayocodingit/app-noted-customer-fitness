@@ -4,7 +4,7 @@
 const Model = use('Model')
 
 class Customer extends Model {
-  static fillable () {
+  static get fillable () {
     return [
       'name',
       'age',

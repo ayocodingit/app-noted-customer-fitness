@@ -4,7 +4,7 @@
 const Model = use('Model')
 
 class User extends Model {
-  static fillable () {
+  static get fillable () {
     return [
       'role',
       'username',
