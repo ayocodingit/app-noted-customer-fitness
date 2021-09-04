@@ -60,7 +60,7 @@ class CustomerController {
    * @param {Response} ctx.response
    */
   async update ({ params, request, response }) {
-    await update(params.id, await await payload(request, Customer), Customer)
+    await update(params.id, await payload(request, Customer), Customer)
 
     return response.json({ message: 'Updated' })
   }

@@ -25,6 +25,7 @@ Route.post('register', 'AuthController.register').prefix('api').middleware('gues
 Route.group(() => {
   Route.get('/', 'HomeController.index')
   Route.post('refresh-token', 'AuthController.refreshToken')
+  Route.post('logout', 'AuthController.logout')
   Route.get('user', 'AuthController.user')
   Route.get('user-role', 'UserController.index')
   Route.post('update-password', 'AuthController.updatePassword')

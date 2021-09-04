@@ -29,7 +29,7 @@ const destroy = async (id, model) => {
 }
 
 const payload = async (request, model) => {
-  return request.only(model.fillable())
+  return request.only(model.fillable)
 }
 
 module.exports = {
