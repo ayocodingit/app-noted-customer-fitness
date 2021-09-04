@@ -17,7 +17,7 @@ class Customer extends Model {
 
   static boot () {
     super.boot()
-    this.addTrait('WhereCustom')
+    this.addTrait('Query')
   }
 
   program () {

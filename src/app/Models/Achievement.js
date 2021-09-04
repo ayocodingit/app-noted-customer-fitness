@@ -27,7 +27,7 @@ class Achievement extends Model {
 
   static boot () {
     super.boot()
-    this.addTrait('WhereCustom')
+    this.addTrait('Query')
     this.addHook('afterCreate', 'AchievementHook.updateNumberOfDrinkProgram')
   }
 
