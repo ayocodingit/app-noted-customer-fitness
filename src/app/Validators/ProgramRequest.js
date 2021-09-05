@@ -1,8 +1,8 @@
 'use strict'
 
-const Antl = use('Antl')
 const Exists = use('utils/Rules/Exists')
 const { failResponse } = use('utils/Validators')
+const validatorMessage = require('adonis-message-validation-generator')
 
 class ProgramRequest {
   constructor () {
@@ -21,15 +21,7 @@ class ProgramRequest {
   }
 
   get messages () {
-    return {
-      'customer_id.required': Antl.formatMessage('validation.required', { attribute: 'customer_id' }),
-      'package_id.required': Antl.formatMessage('validation.required', { attribute: 'package_id' }),
-      'customer_id.integer': Antl.formatMessage('validation.integer', { attribute: 'customer_id' }),
-      'package_id.integer': Antl.formatMessage('validation.integer', { attribute: 'package_id' }),
-      'customer_id.exists': Antl.formatMessage('validation.exists', { attribute: 'customer_id' }),
-      'package_id.exists': Antl.formatMessage('validation.exists', { attribute: 'package_id' }),
-      'customer_id.unique': Antl.formatMessage('validation.unique', { attribute: 'customer_id' })
-    }
+    return validatorMessage(this.rules)
   }
 
   async fails (errorMessages) {

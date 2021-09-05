@@ -15,4 +15,3 @@ exclude_patterns:
 - "src/test"
 - "src/node_modules"
 - "src/database"
-- "src/utils/Wheres.js"

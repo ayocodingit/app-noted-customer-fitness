@@ -1,8 +1,8 @@
 'use strict'
 
-const { formatMessage } = use('Antl')
 const { failResponse } = use('utils/Validators')
 const Exists = use('utils/Rules/Exists')
+const validatorMessage = require('adonis-message-validation-generator')
 
 class LoginRequest {
   constructor () {
@@ -21,11 +21,7 @@ class LoginRequest {
   }
 
   get messages () {
-    return {
-      'username.required': formatMessage('validation.required', { attribute: 'username' }),
-      'username.exists': formatMessage('validation.exists', { attribute: 'username' }),
-      'password.required': formatMessage('validation.required', { attribute: 'password' })
-    }
+    return validatorMessage(this.rules)
   }
 
   async fails (errorMessages) {

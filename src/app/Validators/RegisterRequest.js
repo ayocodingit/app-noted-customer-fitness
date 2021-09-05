@@ -2,6 +2,7 @@
 
 const { formatMessage } = use('Antl')
 const { failResponse } = use('utils/Validators')
+const validatorMessage = require('adonis-message-validation-generator')
 
 class RegisterRequest {
   get validateAll () {
@@ -17,15 +18,11 @@ class RegisterRequest {
   }
 
   get messages () {
-    return {
-      'username.required': formatMessage('validation.required', { attribute: 'username' }),
-      'username.unique': formatMessage('validation.unique', { attribute: 'username' }),
-      'password.required': formatMessage('validation.required', { attribute: 'password' }),
+    return Object.assign(validatorMessage(this.rules), {
       'password.min': formatMessage('validation.min_numeric', { attribute: 'password', min: 6 }),
-      'password_confirmation.required': formatMessage('validation.required', { attribute: 'password_confirmation' }),
       'password_confirmation.min': formatMessage('validation.min_numeric', { attribute: 'password_confirmation', min: 6 }),
       'password_confirmation.same': formatMessage('validation.same', { attribute: 'password_confirmation', other: 'password' })
-    }
+    })
   }
 
   async fails (errorMessages) {

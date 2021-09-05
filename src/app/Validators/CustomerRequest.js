@@ -1,8 +1,9 @@
 'use strict'
 
-const Antl = use('Antl')
+const { formatMessage } = use('Antl')
 const Exists = use('utils/Rules/Exists')
 const { failResponse } = use('utils/Validators')
+const validatorMessage = require('adonis-message-validation-generator')
 
 class CustomerRequest {
   constructor () {
@@ -27,20 +28,11 @@ class CustomerRequest {
   }
 
   get messages () {
-    return {
-      'name.required': Antl.formatMessage('validation.required', { attribute: 'name' }),
-      'name.string': Antl.formatMessage('validation.string', { attribute: 'name' }),
-      'name.max': Antl.formatMessage('validation.max_numeric', { attribute: 'name', max: 30 }),
-      'age.required': Antl.formatMessage('validation.required', { attribute: 'age' }),
-      'age.integer': Antl.formatMessage('validation.integer', { attribute: 'age' }),
-      'height.required': Antl.formatMessage('validation.required', { attribute: 'height' }),
-      'height.integer': Antl.formatMessage('validation.integer', { attribute: 'height' }),
-      'address.max': Antl.formatMessage('validation.max_numeric', { attribute: 'address', max: 255 }),
-      'phone_number.max': Antl.formatMessage('validation.max_numeric', { attribute: 'phone number', max: 15 }),
-      'user_id.required': Antl.formatMessage('validation.required', { attribute: 'user_id' }),
-      'user_id.unique': Antl.formatMessage('validation.unique', { attribute: 'user_id' }),
-      'user_id.exists': Antl.formatMessage('validation.exists', { attribute: 'user_id' })
-    }
+    return Object.assign(validatorMessage(this.rules), {
+      'name.max': formatMessage('validation.max_numeric', { attribute: 'name', max: 30 }),
+      'address.max': formatMessage('validation.max_numeric', { attribute: 'address', max: 255 }),
+      'phone_number.max': formatMessage('validation.max_numeric', { attribute: 'phone number', max: 15 })
+    })
   }
 
   async fails (errorMessages) {
