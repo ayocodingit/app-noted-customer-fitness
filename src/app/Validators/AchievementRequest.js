@@ -1,6 +1,5 @@
 'use strict'
 
-const Exists = use('utils/Rules/Exists')
 const { failResponse } = use('utils/Validators')
 const validatorMessage = require('adonis-message-validation-generator')
 
@@ -10,7 +9,6 @@ class AchievementRequest {
   }
 
   get rules () {
-    Exists()
     return {
       weight: 'required|number',
       body_fat: 'required|number',
@@ -37,7 +35,7 @@ class AchievementRequest {
   }
 
   async fails (errorMessages) {
-    return failResponse(this.ctx, errorMessages)
+    return failResponse(this.ctx.response, errorMessages)
   }
 }
 

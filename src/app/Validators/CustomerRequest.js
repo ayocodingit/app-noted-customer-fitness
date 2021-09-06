@@ -1,7 +1,6 @@
 'use strict'
 
 const { formatMessage } = use('Antl')
-const Exists = use('utils/Rules/Exists')
 const { failResponse } = use('utils/Validators')
 const validatorMessage = require('adonis-message-validation-generator')
 
@@ -12,8 +11,6 @@ class CustomerRequest {
 
   get rules () {
     const id = this.ctx.params.id
-    Exists()
-
     return {
       name: 'required|string|max:30',
       age: 'required|integer',
@@ -33,7 +30,7 @@ class CustomerRequest {
   }
 
   async fails (errorMessages) {
-    return failResponse(this.ctx, errorMessages)
+    return failResponse(this.ctx.response, errorMessages)
   }
 }
 

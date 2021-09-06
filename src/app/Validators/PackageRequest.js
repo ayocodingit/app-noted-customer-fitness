@@ -11,7 +11,6 @@ class PackageRequest {
 
   get rules () {
     const id = this.ctx.params.id
-
     return {
       name: `required|string|max:10|unique:packages,name,id,${id}`,
       price: 'required|integer',
@@ -28,7 +27,7 @@ class PackageRequest {
   }
 
   async fails (errorMessages) {
-    return failResponse(this.ctx, errorMessages)
+    return failResponse(this.ctx.response, errorMessages)
   }
 }
 
