@@ -1,14 +1,10 @@
 'use strict'
 
 const { formatMessage } = use('Antl')
-const { failResponse } = use('utils/Validators')
 const validatorMessage = require('adonis-message-validation-generator')
+const Validator = use('utils/Validator')
 
-class PackageRequest {
-  get validateAll () {
-    return true
-  }
-
+class PackageRequest extends Validator{
   get rules () {
     const id = this.ctx.params.id
     return {
@@ -24,10 +20,6 @@ class PackageRequest {
       'name.max': formatMessage('validation.max_numeric', { attribute: 'name', max: 10 }),
       'description.max': formatMessage('validation.max_numeric', { attribute: 'description', max: 255 })
     })
-  }
-
-  async fails (errorMessages) {
-    return failResponse(this.ctx.response, errorMessages)
   }
 }
 

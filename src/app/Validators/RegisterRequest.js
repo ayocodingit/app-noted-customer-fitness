@@ -1,14 +1,11 @@
 'use strict'
 
 const { formatMessage } = use('Antl')
-const { failResponse } = use('utils/Validators')
 const validatorMessage = require('adonis-message-validation-generator')
+const Validator = use('utils/Validator')
 
-class RegisterRequest {
-  get validateAll () {
-    return true
-  }
 
+class RegisterRequest extends Validator{
   get rules () {
     return {
       username: 'required|unique:users,username',
@@ -23,10 +20,6 @@ class RegisterRequest {
       'password_confirmation.min': formatMessage('validation.min_numeric', { attribute: 'password_confirmation', min: 6 }),
       'password_confirmation.same': formatMessage('validation.same', { attribute: 'password_confirmation', other: 'password' })
     })
-  }
-
-  async fails (errorMessages) {
-    return failResponse(this.ctx.response, errorMessages)
   }
 }
 

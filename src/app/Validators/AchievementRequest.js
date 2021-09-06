@@ -1,13 +1,8 @@
 'use strict'
 
-const { failResponse } = use('utils/Validators')
-const validatorMessage = require('adonis-message-validation-generator')
+const Validator = use('utils/Validator')
 
-class AchievementRequest {
-  get validateAll () {
-    return true
-  }
-
+class AchievementRequest extends Validator {
   get rules () {
     return {
       weight: 'required|number',
@@ -28,14 +23,6 @@ class AchievementRequest {
       package_id: 'integer|exists:packages,id',
       customer_id: 'required|integer|exists:programs,customer_id'
     }
-  }
-
-  get messages () {
-    return validatorMessage(this.rules)
-  }
-
-  async fails (errorMessages) {
-    return failResponse(this.ctx.response, errorMessages)
   }
 }
 
