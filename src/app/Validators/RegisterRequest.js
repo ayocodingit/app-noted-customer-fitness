@@ -4,8 +4,7 @@ const { formatMessage } = use('Antl')
 const validatorMessage = require('adonis-message-validation-generator')
 const Validator = use('utils/Validator')
 
-
-class RegisterRequest extends Validator{
+class RegisterRequest extends Validator {
   get rules () {
     return {
       username: 'required|unique:users,username',

@@ -4,7 +4,6 @@ const { formatMessage } = use('Antl')
 const validatorMessage = require('adonis-message-validation-generator')
 const Validator = use('utils/Validator')
 
-
 class CustomerRequest extends Validator {
   get rules () {
     const id = this.ctx.params.id

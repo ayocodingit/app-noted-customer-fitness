@@ -2,7 +2,7 @@
 
 const Validator = use('utils/Validator')
 
-class LoginRequest extends Validator{
+class LoginRequest extends Validator {
   get rules () {
     return {
       username: 'required|exists:users,username',

@@ -8,11 +8,11 @@ class Validator {
     return true
   }
 
-  get rules (){
+  get rules () {
     return {}
   }
 
-  get messages (){
+  get messages () {
     return validatorMessage(this.rules)
   }
 

@@ -2,7 +2,7 @@
 
 const Validator = use('utils/Validator')
 
-class ProgramRequest extends Validator{
+class ProgramRequest extends Validator {
   get rules () {
     return {
       customer_id: 'required|integer|unique:programs,customer_id|exists:customers,id',
