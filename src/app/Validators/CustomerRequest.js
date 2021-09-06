@@ -6,16 +6,13 @@ const { failResponse } = use('utils/Validators')
 const validatorMessage = require('adonis-message-validation-generator')
 
 class CustomerRequest {
-  constructor () {
-    Exists()
-  }
-
   get validateAll () {
     return true
   }
 
   get rules () {
     const id = this.ctx.params.id
+    Exists()
 
     return {
       name: 'required|string|max:30',

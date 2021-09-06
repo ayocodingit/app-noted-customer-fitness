@@ -5,15 +5,12 @@ const { failResponse } = use('utils/Validators')
 const validatorMessage = require('adonis-message-validation-generator')
 
 class AchievementRequest {
-  constructor () {
-    Exists()
-  }
-
   get validateAll () {
     return true
   }
 
   get rules () {
+    Exists()
     return {
       weight: 'required|number',
       body_fat: 'required|number',

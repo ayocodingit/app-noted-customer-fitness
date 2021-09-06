@@ -5,15 +5,12 @@ const Exists = use('utils/Rules/Exists')
 const validatorMessage = require('adonis-message-validation-generator')
 
 class LoginRequest {
-  constructor () {
-    Exists()
-  }
-
   get validateAll () {
     return true
   }
 
   get rules () {
+    Exists()
     return {
       username: 'required|exists:users,username',
       password: 'required'
