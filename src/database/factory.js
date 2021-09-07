@@ -18,7 +18,7 @@ const RoleEnum = use('App/Enums/RoleEnum')
 Factory.blueprint('App/Models/User', (faker) => {
   return {
     username: faker.username(),
-    role: faker.pickone(RoleEnum.getArray('value')),
+    role: faker.pickone(RoleEnum.values),
     password: 'fitnes'
   }
 })
